@@ -12,6 +12,13 @@
  * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
+replay.addEventListener('click', function() {
+  modal.classList.toggle('hide');
+  player.reset();
+  player.victory = false;
+  win.requestAnimationFrame (main);
+});
+
 
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
@@ -23,6 +30,7 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
+        id;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -55,7 +63,12 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+         if (player.victory === true) {
+           win.cancelAnimationFrame(id);
+           modal.classList.toggle('hide');
+         }
+         else {
+        id = win.requestAnimationFrame(main);
     }
 
     /* This function does some initial setup that should only occur once,
@@ -90,12 +103,10 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-/* Loop through all of the objects within the allEnemies array and call
-  * the render function you have defined */
-         //allEnemies.forEach(function(enemy) {
-          //  enemy.update(dt);
-      // Doesn't exist yet //  });
-        player.update();
+        allEnemies.forEach(function(enemy) {
+           enemy.update(dt);
+        });
+      player.update();
     }
 
     /* This function initially draws the "game level", it will then call
