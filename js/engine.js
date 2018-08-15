@@ -44,7 +44,7 @@ var Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
-        update(dt)
+        update(dt);
         render();
 
         /* Set our lastTime variable which is used to determine the time delta
@@ -94,7 +94,10 @@ var Engine = (function(global) {
        allEnemies.forEach(function(enemy) {
          enemy.update(dt);
          });
-    // player.update(dt);
+      //  player.update();
+
+
+
 }
 
     /* This function initially draws the "game level", it will then call
@@ -150,12 +153,22 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+
+
+
       allEnemies.forEach(function(enemy) {
        enemy.render();
-     });
-     player.render();
+         })
+         player.render();
 
 };
+const player = new Hero();
+const bug1 = new Enemy(-101, 0, 200);
+const bug2 = new Enemy(-101, 83, 300);
+const bug3 = new Enemy((-101*2.5), 83, 300);
+const allEnemies = [];
+allEnemies.push(bug1, bug2, bug3);
+console.log(allEnemies);
 
 
 
