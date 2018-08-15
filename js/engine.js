@@ -12,13 +12,6 @@
  * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
-replay.addEventListener('click', function() {
-  modal.classList.toggle('hide');
-  player.reset();
-  player.victory = false;
-  win.requestAnimationFrame (main);
-});
-
 
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
@@ -30,7 +23,6 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
-        id;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -52,7 +44,7 @@ var Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
-        update(dt);
+        update(dt)
         render();
 
         /* Set our lastTime variable which is used to determine the time delta
@@ -63,12 +55,7 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-         if (player.victory === true) {
-           win.cancelAnimationFrame(id);
-           modal.classList.toggle('hide');
-         }
-         else {
-        id = win.requestAnimationFrame(main);
+        win.requestAnimationFrame(main);
     }
 
     /* This function does some initial setup that should only occur once,
@@ -95,6 +82,7 @@ var Engine = (function(global) {
         // checkCollisions();
     }
 
+
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
@@ -103,11 +91,11 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-        allEnemies.forEach(function(enemy) {
-           enemy.update(dt);
-        });
-      player.update();
-    }
+       allEnemies.forEach(function(enemy) {
+         enemy.update(dt);
+         });
+    // player.update(dt);
+}
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -162,12 +150,14 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        allEnemies.forEach(function(enemy) {
-            enemy.render();
-        });
+      allEnemies.forEach(function(enemy) {
+       enemy.render();
+     });
+     player.render();
 
-        player.render();
-    }
+};
+
+
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
@@ -186,7 +176,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-horn-girl.png'
     ]);
     Resources.onReady(init);
 
