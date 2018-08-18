@@ -43,7 +43,7 @@ Enemy.prototype.update = function(dt) {
 
 
 class Hero {
-  constructor() {
+  constructor(x, y) {
     this.sprite = 'images/char-horn-girl.png';
     this.step = 101;
     this.jump = 83;
