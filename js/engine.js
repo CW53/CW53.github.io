@@ -162,7 +162,7 @@ var Engine = (function(global) {
          player.render();
 
 };
-const player = new Hero();
+const player = new Hero(100, 80);
 const bug1 = new Enemy(-101, 0, 200);
 const bug2 = new Enemy(-101, 83, 300);
 const bug3 = new Enemy((-101*2.5), 83, 300);
