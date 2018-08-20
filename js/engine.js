@@ -158,10 +158,10 @@ var Engine = (function(global) {
 
       allEnemies.forEach(function(enemy) {
        enemy.render();
-         })
+         });
          player.render();
 
-};
+}
 const player = new Hero(100, 80);
 const bug1 = new Enemy(-101, 0, 200);
 const bug2 = new Enemy(-101, 83, 300);
