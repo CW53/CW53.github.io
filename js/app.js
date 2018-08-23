@@ -11,11 +11,18 @@ class Enemy {
     this.boundary = this.step * 5;
     this.resetPos = -this.step;
   }
-}
-  Enemy.prototype.render = function (dt) {
+render()  {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-
 };
+update (dt) {
+  if (this.x < this.boundary) {
+    this.x += this.speed * dt;
+  }
+  else {
+    this.x = this.resetPos;
+  }
+};
+}
 
 // update () {
   //for (let enemy of allEnemies) {
@@ -25,18 +32,12 @@ class Enemy {
 //}
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
     // if enemy is not passed boundary, move forward; increment x by speed * dt. else reset pos to start
-    if (this.x < this.boundary) {
-      this.x += this.speed * dt;
-    }
-    else {
-      this.x = this.resetPos;
-    }
-};
+
 
 
 // Draw the enemy on the screen, required method for game
@@ -51,10 +52,23 @@ class Hero {
     this.startY = (this.jump * 4) + 55;
     this.x = this.startX;
     this.y = this.startY;
-  }
-
+}
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+}
+
+update() {
+  for (let enemy of allEnemies) {
+    if (this.y === enemy.y && (enemy.x + enemy.step/2 > this.x && enemy.x < this.x + this.step/2) ) {
+      alert('Collision!')
+      this.reset();
+    }
+  }
+  reset() {
+    this.y = this.startY;
+    this.x = this.startX;
+};
 }
 
 /**
@@ -84,6 +98,7 @@ handleInput(input) {
     }
       break;
   }
+  this.Hero = player.handleInput ();
 }
 }
 
@@ -106,7 +121,6 @@ document.addEventListener('keyup', function(e) {
     };
   player.handleInput(allowedKeys[e.keyCode]);
 });
-
 const player = new Hero(100, 80);
 const bug1 = new Enemy(-101, 0, 200);
 const bug2 = new Enemy(-101, 83, 300);
