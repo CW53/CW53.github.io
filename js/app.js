@@ -106,4 +106,4 @@ document.addEventListener('keyup', function(e) {
     };
   player.handleInput(allowedKeys[e.keyCode]);
 });
-const player = new Hero(100, 80);
+
