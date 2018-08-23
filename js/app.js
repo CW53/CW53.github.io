@@ -52,9 +52,8 @@ class Hero {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
-
-//update()
-//for (let enemy of allEnemies) {
+  //update()
+  //for (let enemy of allEnemies) {
   // if (
   //  this.y === enemy.y &&
   //  (enemy.x + enemy.step / 2 > this.x && enemy.x < this.x + this.step / 2)
@@ -63,42 +62,43 @@ class Hero {
   //  this.reset();
   //  if (this.y === 55) {
   //    this.victory = true;
-//    }
-//  }
-//}
-reset();
-this.y = this.startY;
-this.x = this.startX;
+  //    }
+  //  }
+  //}
+  reset() {
+    this.y = this.startY;
+    this.x = this.startX;
+  }
+  /**
+   * @param {string} input - Direction to travel
+   */
 
-/**
- * @param {string} input - Direction to travel
- */
-
-handleInput(input) {
-switch (input) {
-  case "left":
-    if (this.x > 0) {
-      this.x -= this.step;
+  handleInput(input) {
+    switch (input) {
+      case "left":
+        if (this.x > 0) {
+          this.x -= this.step;
+        }
+        break;
+      case "up":
+        if (this.y > this.jump) {
+          this.y -= this.jump;
+        }
+        break;
+      case "right":
+        if (this.x < this.step * 4) {
+          this.x += this.step;
+        }
+        break;
+      case "down":
+        if (this.y < this.jump * 4) {
+          this.y += this.jump;
+        }
+        break;
     }
-    break;
-  case "up":
-    if (this.y > this.jump) {
-      this.y -= this.jump;
-    }
-    break;
-  case "right":
-    if (this.x < this.step * 4) {
-      this.x += this.step;
-    }
-    break;
-  case "down":
-    if (this.y < this.jump * 4) {
-      this.y += this.jump;
-    }
-    break;
+    this.Hero = player.handleInput();
+  }
 }
-this.Hero = player.handleInput();
-
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
