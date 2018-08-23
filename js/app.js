@@ -96,7 +96,6 @@ class Hero {
         }
         break;
     }
-    this.Hero = player.handleInput();
   }
 }
 // Now instantiate your objects.
