@@ -22,7 +22,8 @@ var Engine = (function(global) {
     win = global.window,
     canvas = doc.createElement("canvas"),
     ctx = canvas.getContext("2d"),
-    lastTime;
+    lastTime,
+    id;
 
   canvas.width = 505;
   canvas.height = 606;
@@ -55,7 +56,11 @@ var Engine = (function(global) {
     /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-    win.requestAnimationFrame(main);
+    if (player.victory === true) {
+      win.cancelAnimationFrame(id);
+    } else {
+      id = win.requestAnimationFrame(main);
+    }
   }
 
   /* This function does some initial setup that should only occur once,
@@ -162,7 +167,8 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
   function reset() {
-    // noop
+    this.y = this.startY;
+    this.x = this.startX;
   }
 
   /* Go ahead and load all of the images we know we're going to need to
