@@ -51,20 +51,20 @@ class Hero {
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
+  checkCollisions() {
+    for (let enemy of allEnemies) {
+      if (
+        this.y === enemy.y &&
+        (enemy.x + enemy.step / 2 > this.x && enemy.x < this.x + this.step / 2)
+      ) {
+        this.reset();
+      }
+    }
+    if (this.y === 55) {
+      this.victory = true;
+    }
+  }
 
-  //update()
-  //for (let enemy of allEnemies) {
-  // if (
-  //  this.y === enemy.y &&
-  //  (enemy.x + enemy.step / 2 > this.x && enemy.x < this.x + this.step / 2)
-  //) {
-  //  alert("Collision!");
-  //  this.reset();
-  //  if (this.y === 55) {
-  //    this.victory = true;
-  //    }
-  //  }
-  //}
   reset() {
     this.y = this.startY;
     this.x = this.startX;
