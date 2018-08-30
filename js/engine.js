@@ -24,6 +24,7 @@ var Engine = (function(global) {
     ctx = canvas.getContext("2d"),
     lastTime,
     id;
+   
 
   canvas.width = 505;
   canvas.height = 606;
