@@ -170,6 +170,7 @@ var Engine = (function(global) {
   function reset() {
     this.y = this.startY;
     this.x = this.startX;
+    alert('Game!');
   }
 
   /* Go ahead and load all of the images we know we're going to need to
