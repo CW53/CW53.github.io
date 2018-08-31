@@ -57,12 +57,13 @@ class Hero {
         this.y === enemy.y &&
         (enemy.x + enemy.step / 2 > this.x && enemy.x < this.x + this.step / 2)
       ) {
+        console.log("Collision");
         this.reset();
       }
+    if (this.y === 55 && (this.victory = true)) {
+      console.log("Game! Restart?");
     }
-    if (this.y === 55) {
-      this.victory = true;
-    }
+  }
   }
 
   reset() {
